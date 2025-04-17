@@ -1,2 +1,2 @@
 import TodoForm from "./TodoForm";
-import Todoitem from "./Todoitem";
+import TodoItem from "./TodoItem";

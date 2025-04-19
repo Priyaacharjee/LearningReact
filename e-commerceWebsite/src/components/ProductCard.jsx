@@ -3,7 +3,8 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react';
 import Skeleton from './Skeleton';
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
+import Product, { HOF } from './Product';
 
 const ProductCard = () => {
 
@@ -14,13 +15,13 @@ const ProductCard = () => {
 
     useEffect(() => {
         fetchData();
-        const timer= setInterval(()=>{
-           console.log('fn component');       
-        },1000);
+        // const timer= setInterval(()=>{
+        //    console.log('fn component');       
+        // },1000);
 
-        return()=>{
-        clearInterval(timer);
-        }
+        // return()=>{
+        // clearInterval(timer);
+        // }
     }, [])  //callback funnc,array dependency=> useEffect hook has
 
     const fetchData = async () => {
@@ -40,6 +41,9 @@ const ProductCard = () => {
             setCounter(counter + 1);
         }
     }
+
+    const HOFComponent = HOF(Product); //This HOF is a higher order component
+
     //conditional rendering
     // if(filteredProducts.length===0){
     //     return <Skeleton/>
@@ -85,20 +89,19 @@ const ProductCard = () => {
                         key={product.id}
                         className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 p-4"
                         to={`/product/${product.id}`}>
-                        <img
-                            src={product.image}
-                            alt={product.title}
-                            className="w-full h-40 object-cover rounded-xl mb-4"
-                        />
-                        <h2 className="text-lg font-semibold text-gray-800">{product.title}</h2>
-                        <p className="text-sm text-gray-500 mb-2">{product.rating.rate}</p>
-                        <p className="text-sm text-gray-500 mb-2">{product.description}</p>
-                        <div className="flex justify-between items-center">
-                            <span className="text-xl font-bold text-indigo-600">{product.price}</span>
-                            <button className="bg-indigo-600 text-white text-sm px-4 py-1.5 rounded-lg hover:bg-indigo-700 transition-colors">
-                                Add to Cart
-                            </button>
-                        </div>
+                        {
+                            product.rating.rate >= 4 ? <HOFComponent image={product.image}
+                                title={product.title}
+                                price={product.price}
+                                description={product.description}
+                                rate={product.rating.rate} /> : 
+                                <Product
+                                image={product.image}
+                                title={product.title}
+                                price={product.price}
+                                description={product.description}
+                                rate={product.rating.rate} />
+                        }
                     </Link>
                 ))}
             </div>
@@ -107,3 +110,4 @@ const ProductCard = () => {
 }
 
 export default ProductCard
+

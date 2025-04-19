@@ -14,6 +14,13 @@ const ProductCard = () => {
 
     useEffect(() => {
         fetchData();
+        const timer= setInterval(()=>{
+           console.log('fn component');       
+        },1000);
+
+        return()=>{
+        clearInterval(timer);
+        }
     }, [])  //callback funnc,array dependency=> useEffect hook has
 
     const fetchData = async () => {

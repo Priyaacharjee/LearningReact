@@ -5,3 +5,6 @@
 **Redux**(stackathon library) helps in state management,means the data passing from here and there it manages it in a organized way.
 
 in react - react-redux, Redux-toolkit(RTK)
+
+cleanup,componentDidmount,ComponentwillUnmount...
+lazy loading,suspense,custom hooks

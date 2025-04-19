@@ -1,4 +1,4 @@
-import React from "react";
+import React,{lazy,Suspense} from "react";
 import { Navbar } from "./components/Navbar";
 import ProductCard from "./components/ProductCard";
 import Kid from "./components/Kid";
@@ -8,6 +8,11 @@ import Error from "./components/Error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import ProductDetails from "./components/ProductDetails";
 import About from "./components/About";
+//import Grocery from "./components/Grocery";  //normal import na kore dynamic import korbo using lazy loading,basically making a new bundler for optimization and improved performance.
+
+//lazy loading/code spliting/dynamic import
+const Grocery = lazy(()=> import ('./components/Grocery')
+)
 
 // ✅ Layout component to show Navbar + dynamic pages
 const Layout = () => {
@@ -44,6 +49,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/about",
         element: <About />
+      },
+      {
+        path: "/grocery",
+        element: <Suspense fallback={<h1>Loading....</h1>}><Grocery /></Suspense>
       },
       {
         path: "/product/:productId",

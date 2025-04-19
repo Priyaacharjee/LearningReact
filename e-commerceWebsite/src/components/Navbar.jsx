@@ -17,6 +17,7 @@ export const Navbar = () => {
           <Link to="/women">WOMEN</Link>
           <Link to="/kid">KIDS</Link>
           <li><Link to="/about">ABOUT</Link></li>
+          <li><Link to="/grocery">GROCERY</Link></li>
         </ul>
         <button className="bg-purple-700 text-white mr-10 rounded-lg font-bold w-[5%]" onClick={()=>{
             btnName==="Light"?setbtnName("Dark"):setbtnName("Light");

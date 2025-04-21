@@ -1,4 +1,5 @@
 import React from "react";
+import UserContext from "../utils/UserContext";
 class ProfileClass extends React.Component {
     constructor(props) {
         super(props);
@@ -6,7 +7,7 @@ class ProfileClass extends React.Component {
             count: 0,
             count2: 0
         }
-        console.log("ctr is called");
+        //console.log("ctr is called");
 
     }
 
@@ -44,6 +45,13 @@ class ProfileClass extends React.Component {
         return (
             <div className="border border-zinc-700">
                 <h1>Profile ClassBased</h1>
+                <UserContext.Consumer>
+                    {
+                        (data)=>(
+                            <h1>{data.name}</h1>
+                        )
+                    }
+                </UserContext.Consumer>
                 <h3>Name:{this.props.name}</h3>
                 <h3>Address:{this.props.address}</h3>
                 <h3>Email:{this.props.email}</h3>

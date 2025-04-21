@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom";
+import UserContext from "../utils/UserContext";
 
 export const Navbar = () => {
     const[btnName,setbtnName]=useState("Light");
+
+    const user=useContext(UserContext);
     
     useEffect(()=>{
       
@@ -18,6 +21,7 @@ export const Navbar = () => {
           <Link to="/kid">KIDS</Link>
           <li><Link to="/about">ABOUT</Link></li>
           <li><Link to="/grocery">GROCERY</Link></li>
+          <li className="ml-16">{user.name}</li>
         </ul>
         <button className="bg-purple-700 text-white mr-10 rounded-lg font-bold w-[5%]" onClick={()=>{
             btnName==="Light"?setbtnName("Dark"):setbtnName("Light");

@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 // import productList from '../utils/constant'
 import { useState } from 'react'
 import { useEffect } from 'react';
 import Skeleton from './Skeleton';
 import { Link } from "react-router-dom"
 import Product, { HOF } from './Product';
+import UserContext from '../utils/UserContext';
 
 const ProductCard = () => {
 
@@ -12,7 +13,9 @@ const ProductCard = () => {
     const [allProducts, setallProducts] = useState([]);
     const [counter, setCounter] = useState(0);
     const [search, setSearch] = useState("");
-
+    
+    const user=useContext(UserContext); 
+    
     useEffect(() => {
         fetchData();
         // const timer= setInterval(()=>{
@@ -70,6 +73,9 @@ const ProductCard = () => {
                 >
                     Reset
                 </button>
+                <div>
+                    <input className="border border-black ml-5" type="text" value={user.name} onChange={(e)=> user.setUserName(e.target.value)}/>
+                </div>
 
             </div>
             <div>
@@ -94,13 +100,13 @@ const ProductCard = () => {
                                 title={product.title}
                                 price={product.price}
                                 description={product.description}
-                                rate={product.rating.rate} /> : 
+                                rate={product.rating.rate} /> :
                                 <Product
-                                image={product.image}
-                                title={product.title}
-                                price={product.price}
-                                description={product.description}
-                                rate={product.rating.rate} />
+                                    image={product.image}
+                                    title={product.title}
+                                    price={product.price}
+                                    description={product.description}
+                                    rate={product.rating.rate} />
                         }
                     </Link>
                 ))}

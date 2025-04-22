@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Skeleton from './Skeleton';
 import { useParams } from "react-router-dom";
 import useGetSingleProduct from '../hook/useGetSingleProduct';
+import { addItems } from '../store/cartSlice';
+import {useDispatch} from "react-redux";
 
 
 const ProductDetails = () => {
@@ -20,12 +22,17 @@ const ProductDetails = () => {
     // }
 
     const singleProduct=useGetSingleProduct(productId);  //custom hook
+    const dispatch= useDispatch();
 
     if (singleProduct === null) {
         return <Skeleton />
     }
 
     const { image, title, description, price } = singleProduct;
+
+    const handleCartItems=()=>{
+        dispatch(addItems(singleProduct));
+    }
 
     return (
         <div className='flex justify-center items-center w-full min-h-screen bg-gray-100'>
@@ -36,7 +43,7 @@ const ProductDetails = () => {
                 <p className='text-sm text-gray-500 mb-2'>{description}</p>
                 <div className="flex justify-between items-center">
                     <span className="text-xl font-bold text-indigo-600">{price}</span>
-                    <button className="bg-indigo-600 text-white text-sm px-4 py-1.5 rounded-lg hover:bg-indigo-700 transition-colors">
+                    <button onClick={handleCartItems} className="bg-indigo-600 text-white text-sm px-4 py-1.5 rounded-lg hover:bg-indigo-700 transition-colors">
                         Add to Cart
                     </button>
                 </div>

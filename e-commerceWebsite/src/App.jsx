@@ -1,4 +1,4 @@
-import React,{lazy,Suspense, useEffect, useState} from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import { Navbar } from "./components/Navbar";
 import ProductCard from "./components/ProductCard";
 import Kid from "./components/Kid";
@@ -9,23 +9,29 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import ProductDetails from "./components/ProductDetails";
 import About from "./components/About";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux"
+import appStore from "./store/Store";
 import CompoA from "./components/CompoA";
+import Cart from "./components/Cart";
+import Memo from "./components/Memo";
 //import Grocery from "./components/Grocery";  //normal import na kore dynamic import korbo using lazy loading,basically making a new bundler for optimization and improved performance.
 
 //lazy loading/code spliting/dynamic import
-const Grocery = lazy(()=> import ('./components/Grocery')
+const Grocery = lazy(() => import('./components/Grocery')
 )
 
 // ✅ Layout component to show Navbar + dynamic pages
 const Layout = () => {
-  const[userName,setUserName]=useState("Look What you made do!");
-  
+  const [userName, setUserName] = useState("Look What you made do!");
+
   return (
-    <UserContext.Provider value={{name:userName,setUserName}}>
-      <Navbar />
-    {/* <CompoA/> */}
-      <Outlet />
-    </UserContext.Provider>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ name: userName, setUserName }}>
+        <Navbar />
+        {/* <CompoA/> */}
+        <Outlet />
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
@@ -62,10 +68,18 @@ const appRouter = createBrowserRouter([
       {
         path: "/product/:productId",
         element: <ProductDetails />
+      },
+      {
+        path: "/cart",
+        element: <Cart/>
+      },
+      {
+        path: "/memo",
+        element: <Memo/>
       }
     ],
-    errorElement:<Error/>
-    
+    errorElement: <Error />
+
   }
 ]);
 

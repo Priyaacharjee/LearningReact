@@ -15,6 +15,7 @@ import CompoA from "./components/CompoA";
 import Cart from "./components/Cart";
 import Memo from "./components/Memo";
 import Ref from "./components/Ref";
+import Login from "./components/Login";
 //import Grocery from "./components/Grocery";  //normal import na kore dynamic import korbo using lazy loading,basically making a new bundler for optimization and improved performance.
 
 //lazy loading/code spliting/dynamic import
@@ -81,6 +82,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/ref",
         element: <Ref/>
+      },
+      {
+        path: "/login",
+        element: <Login/>
       }
     ],
     errorElement: <Error />
